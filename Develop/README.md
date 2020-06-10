@@ -1,3 +1,3 @@
 This is a random password generator that had a button when clicked, prompts criteria for 4 different catagories of characters that the user chooses to be in their random password. The user may also choose how many characters of each catagory to be in their password. The catagories are lower-cased letters, upper-cased letters, special characters, and numbers. The password is then displayed on the webpage.
-![Random Password Generator web page](./images/password-generator-image.PNG "Password-Generator-image")
+![Random Password Generator web page](./assets/images/password-generator-image.PNG "Password-Generator-image")
 https://scotitakura.github.io/Password-Generator/
