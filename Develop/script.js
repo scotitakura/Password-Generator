@@ -68,8 +68,6 @@ function writePassword() {
     }
   }
 
-  // Created an array for each catagory with random values and then trimmed each down to a fraction of the requested password length
-
   // Added each array into one array
   var passwordConcat = [];
   var passwordArray = passwordConcat.concat(lowerArray, upperArray, specialArray, numberArray);
