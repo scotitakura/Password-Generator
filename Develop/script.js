@@ -8,11 +8,14 @@ var upperCasedCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K
 
 // Write password to the #password input
 function writePassword() {
+
+  // Prompts confirms for 4 catagories
   var hasLowercase = window.confirm("Would you like your password to have lowercase letters?");
   var hasUppercase = window.confirm("Would you like your password to have uppercase letters?");
   var hasSpecialChar = window.confirm("Would you like the password to have special characters?");
   var hasNumber = window.confirm("Would you like the password to have numbers?");
 
+  // Password length checker
   var passwordLength = parseInt(window.prompt("How many characters would you like your password to be? Please choose between 8 and 128."));
 
   if (passwordLength < 8) {
@@ -23,7 +26,10 @@ function writePassword() {
     window.alert("Password length must be less than 128 characters.");
   }
 
+  // Number of window confirms that are true
   var numTrue = ([hasLowercase, hasUppercase, hasSpecialChar, hasNumber].filter(v => v).length);
+
+  // Created empty arrays for each if statement
   var lowerArray = [];
   var upperArray = [];
   var specialArray = [];
@@ -61,17 +67,20 @@ function writePassword() {
     }
   }
 
+  // Created an array for each catagory with random values and then trimmed each down to a fraction of the requested password length
   lowerArray.length = passwordLength/numTrue;
   upperArray.length = passwordLength/numTrue;
   specialArray.length = passwordLength/numTrue;
   numberArray.length = passwordLength/numTrue;
 
+  // Added each array into one array
   var passwordConcat = [];
   var passwordArray = passwordConcat.concat(lowerArray, upperArray, specialArray, numberArray);
 
   console.log(passwordArray.join(''));
   console.log(passwordArray.length);
 
+  // Shuffle around the characters in array
   function shuffle(passwordArray) {
     passwordArray.sort(() => Math.random() - 0.5);
     return passwordArray;
