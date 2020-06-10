@@ -10,7 +10,7 @@ var upperCasedCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K
 function writePassword() {
   var hasLowercase = window.confirm("Would you like your password to have lowercase letters?");
   var hasUppercase = window.confirm("Would you like your password to have uppercase letters?");
-  var hasSpecialchar = window.confirm("Would you like the password to have special characters?");
+  var hasSpecialChar = window.confirm("Would you like the password to have special characters?");
   var hasNumber = window.confirm("Would you like the password to have numbers?");
 
   var passwordLength = parseInt(window.prompt("How many characters would you like your password to be? Please choose between 8 and 128."));
@@ -23,51 +23,66 @@ function writePassword() {
     window.alert("Password length must be less than 128 characters.");
   }
 
-  var numTrue = ([hasLowercase,hasUppercase,hasSpecialchar,hasNumber].filter(v => v).length);
-  var passwordSet = new Set();
-
-  if(hasLowercase) {
-    while(passwordSet < passwordLength/numTrue) {
+  var numTrue = ([hasLowercase, hasUppercase, hasSpecialChar, hasNumber].filter(v => v).length);
+  var lowerArray = [];
+  var upperArray = [];
+  var specialArray = [];
+  var numberArray = [];
+  
+  if(hasLowercase === true) {
+    while(lowerArray.length < passwordLength) {
       var randomIndex = Math.floor(Math.random() * (lowerCasedCharacters.length));
       var character = lowerCasedCharacters[randomIndex];
-      passwordSet.add(character);
+      lowerArray.push(character);
     }
   }
 
-  if(hasUppercase) {
-    while(passwordSet < passwordLength/numTrue) {
+  if(hasUppercase === true) {
+    while(upperArray.length < passwordLength) {
       var randomIndex = Math.floor(Math.random() * (upperCasedCharacters.length));
       var character = upperCasedCharacters[randomIndex];
-      passwordSet.add(character);
+      upperArray.push(character);
     }
   }
 
-  if(hasSpecialchar) {
-    while(passwordSet < passwordLength/numTrue) {
+  if(hasSpecialChar === true) {
+    while(specialArray.length < passwordLength) {
       var randomIndex = Math.floor(Math.random() * (specialCharacters.length));
       var character = specialCharacters[randomIndex];
-      passwordSet.add(character);
+      specialArray.push(character);
     }
   }
 
-  if(hasNumber) {
-    while(passwordSet < passwordLength/numTrue) {
+  if(hasNumber === true) {
+    while(numberArray.length < passwordLength) {
       var randomIndex = Math.floor(Math.random() * (numericCharacters.length));
       var character = numericCharacters[randomIndex];
-      passwordSet.add(character);
+      numberArray.push(character);
     }
   }
 
-  shuffle(passwordSet);
-  var passwordString = passwordSet.toString();
-  window.alert(passwordString);
+  lowerArray.length = passwordLength/numTrue;
+  upperArray.length = passwordLength/numTrue;
+  specialArray.length = passwordLength/numTrue;
+  numberArray.length = passwordLength/numTrue;
 
-  // var password = generatePassword();
-  // var passwordText = document.querySelector("#password");
+  var passwordConcat = [];
+  var passwordArray = passwordConcat.concat(lowerArray, upperArray, specialArray, numberArray);
 
-  // passwordText.value = password;
+  console.log(passwordArray.join(''));
+  console.log(passwordArray.length);
 
+  function shuffle(passwordArray) {
+    passwordArray.sort(() => Math.random() - 0.5);
+    return passwordArray;
+  }
+
+  var passwordShuffle = shuffle(passwordArray);
+  console.log(passwordShuffle.join(''));
+
+  var passwordText = document.querySelector("#password");
+  passwordText.value = passwordShuffle.join('');
 }
 
-// Add event listener to generate button
+// push event listener to generate button
 generateBtn.addEventListener("click", writePassword);
