@@ -10,6 +10,7 @@ var upperCasedCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K
 function writePassword() {
 
   // Prompts confirms for 4 catagories
+  window.alert("Your total password length from the next 4 prompts must add up to be between 8 and 128 characters (0 is an acceptable value).")
   var numLowercase = parseInt(window.prompt("How many lower case characters do you want in your password?"));
   var numUppercase = parseInt(window.prompt("How many upper case characters do you want in your password?"));
   var numSpecialChar = parseInt(window.prompt("How many special characters do you want in your password?"));
@@ -36,7 +37,7 @@ function writePassword() {
   var specialArray = [];
   var numberArray = [];
   
-  if(numLowercase > 0) {
+  if(numLowercase > 0 && passwordLength <= 128) {
     while(lowerArray.length < numLowercase) {
       var randomIndex = Math.floor(Math.random() * (lowerCasedCharacters.length));
       var character = lowerCasedCharacters[randomIndex];
@@ -44,7 +45,7 @@ function writePassword() {
     }
   }
 
-  if(numUppercase > 0) {
+  if(numUppercase > 0 && passwordLength <= 128) {
     while(upperArray.length < numUppercase) {
       var randomIndex = Math.floor(Math.random() * (upperCasedCharacters.length));
       var character = upperCasedCharacters[randomIndex];
@@ -52,7 +53,7 @@ function writePassword() {
     }
   }
 
-  if(numSpecialChar > 0) {
+  if(numSpecialChar > 0 && passwordLength <= 128) {
     while(specialArray.length < numSpecialChar) {
       var randomIndex = Math.floor(Math.random() * (specialCharacters.length));
       var character = specialCharacters[randomIndex];
@@ -60,7 +61,7 @@ function writePassword() {
     }
   }
 
-  if(numNumber > 0) {
+  if(numNumber > 0 && passwordLength <= 128) {
     while(numberArray.length < numNumber) {
       var randomIndex = Math.floor(Math.random() * (numericCharacters.length));
       var character = numericCharacters[randomIndex];
