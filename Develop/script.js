@@ -10,24 +10,25 @@ var upperCasedCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K
 function writePassword() {
 
   // Prompts confirms for 4 catagories
-  var hasLowercase = window.confirm("Would you like your password to have lowercase letters?");
-  var hasUppercase = window.confirm("Would you like your password to have uppercase letters?");
-  var hasSpecialChar = window.confirm("Would you like the password to have special characters?");
-  var hasNumber = window.confirm("Would you like the password to have numbers?");
+  var numLowercase = parseInt(window.prompt("How many lower case characters do you want in your password?"));
+  var numUppercase = parseInt(window.prompt("How many upper case characters do you want in your password?"));
+  var numSpecialChar = parseInt(window.prompt("How many special characters do you want in your password?"));
+  var numNumber = parseInt(window.prompt("How many numbers do you want in your password?"));
 
-  // Password length checker
-  var passwordLength = parseInt(window.prompt("How many characters would you like your password to be? Please choose between 8 and 128."));
+  // Password length total
+  var passwordLength = numLowercase + numUppercase + numSpecialChar + numNumber;
 
-  if (passwordLength < 8) {
+  if (passwordLength >= 8 && passwordLength <= 128) {
+    window.alert("Password is between 8 and 128 characters at " + passwordLength + " characters.");
+  }
+
+  else if (passwordLength < 8) {
     window.alert("Password length must be greater than 8 characters.");
   }
 
-  if (passwordLength > 128) {
+  else if (passwordLength > 128) {
     window.alert("Password length must be less than 128 characters.");
   }
-
-  // Number of window confirms that are true
-  var numTrue = ([hasLowercase, hasUppercase, hasSpecialChar, hasNumber].filter(v => v).length);
 
   // Created empty arrays for each if statement
   var lowerArray = [];
@@ -35,32 +36,32 @@ function writePassword() {
   var specialArray = [];
   var numberArray = [];
   
-  if(hasLowercase === true) {
-    while(lowerArray.length < passwordLength) {
+  if(numLowercase > 0) {
+    while(lowerArray.length < numLowercase) {
       var randomIndex = Math.floor(Math.random() * (lowerCasedCharacters.length));
       var character = lowerCasedCharacters[randomIndex];
       lowerArray.push(character);
     }
   }
 
-  if(hasUppercase === true) {
-    while(upperArray.length < passwordLength) {
+  if(numUppercase > 0) {
+    while(upperArray.length < numUppercase) {
       var randomIndex = Math.floor(Math.random() * (upperCasedCharacters.length));
       var character = upperCasedCharacters[randomIndex];
       upperArray.push(character);
     }
   }
 
-  if(hasSpecialChar === true) {
-    while(specialArray.length < passwordLength) {
+  if(numSpecialChar > 0) {
+    while(specialArray.length < numSpecialChar) {
       var randomIndex = Math.floor(Math.random() * (specialCharacters.length));
       var character = specialCharacters[randomIndex];
       specialArray.push(character);
     }
   }
 
-  if(hasNumber === true) {
-    while(numberArray.length < passwordLength) {
+  if(numNumber > 0) {
+    while(numberArray.length < numNumber) {
       var randomIndex = Math.floor(Math.random() * (numericCharacters.length));
       var character = numericCharacters[randomIndex];
       numberArray.push(character);
@@ -68,17 +69,10 @@ function writePassword() {
   }
 
   // Created an array for each catagory with random values and then trimmed each down to a fraction of the requested password length
-  lowerArray.length = passwordLength/numTrue;
-  upperArray.length = passwordLength/numTrue;
-  specialArray.length = passwordLength/numTrue;
-  numberArray.length = passwordLength/numTrue;
 
   // Added each array into one array
   var passwordConcat = [];
   var passwordArray = passwordConcat.concat(lowerArray, upperArray, specialArray, numberArray);
-
-  console.log(passwordArray.join(''));
-  console.log(passwordArray.length);
 
   // Shuffle around the characters in array
   function shuffle(passwordArray) {
@@ -87,7 +81,6 @@ function writePassword() {
   }
 
   var passwordShuffle = shuffle(passwordArray);
-  console.log(passwordShuffle.join(''));
 
   var passwordText = document.querySelector("#password");
   passwordText.value = passwordShuffle.join('');
